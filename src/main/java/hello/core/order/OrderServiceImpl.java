@@ -9,11 +9,33 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderServiceImpl implements OrderService {
 
-  private final MemberRepository memberRepository;
-  private final DiscountPolicy discountPolicy;
+  @Autowired private MemberRepository memberRepository;
+  @Autowired private DiscountPolicy discountPolicy;
 
-  @Autowired
+  // 필드 주입용
+//  @Autowired
+//  public void setMemberRepository(MemberRepository memberRepository) {
+//    this.memberRepository = memberRepository;
+//  }
+//
+//  @Autowired
+//  public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+//    this.discountPolicy = discountPolicy;
+//  }
+//
+//  public OrderServiceImpl() {
+//
+//  }
+
   public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    this.memberRepository = memberRepository;
+    this.discountPolicy = discountPolicy;
+  }
+
+  // 생성자와 같은 역할을 하는 메서드를 만든 후, 의존성 주입하거나 할 수 있음
+  // 아무 메서드에 주입 가능 (스프링빈이어야 동작 가능 - ex: @Component 사용 된 Class)
+  @Autowired
+  public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
     this.memberRepository = memberRepository;
     this.discountPolicy = discountPolicy;
   }
