@@ -3,14 +3,18 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+//@RequiredArgsConstructor    // final 붙은
 public class OrderServiceImpl implements OrderService {
 
-  @Autowired private MemberRepository memberRepository;
-  @Autowired private DiscountPolicy discountPolicy;
+//  @Autowired private MemberRepository memberRepository;
+//  @Autowired private DiscountPolicy discountPolicy;
+  private final MemberRepository memberRepository;
+  private final DiscountPolicy discountPolicy;
 
   // 필드 주입용
 //  @Autowired
@@ -27,6 +31,7 @@ public class OrderServiceImpl implements OrderService {
 //
 //  }
 
+  @Autowired
   public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
     this.memberRepository = memberRepository;
     this.discountPolicy = discountPolicy;
@@ -36,8 +41,8 @@ public class OrderServiceImpl implements OrderService {
   // 아무 메서드에 주입 가능 (스프링빈이어야 동작 가능 - ex: @Component 사용 된 Class)
   @Autowired
   public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-    this.memberRepository = memberRepository;
-    this.discountPolicy = discountPolicy;
+//    this.memberRepository = memberRepository;
+//    this.discountPolicy = discountPolicy;
   }
 
   @Override
