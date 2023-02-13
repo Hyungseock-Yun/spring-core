@@ -25,13 +25,16 @@ public class AllBeanTest {
     int discountPrice = discountService.discount(member, 10000, "fixDiscountPolicy");
     assertThat(discountService).isInstanceOf(DiscountService.class);
     assertThat(discountPrice).isEqualTo(1000);
+
+    int rateDiscountPolicy = discountService.discount(member, 20000, "rateDiscountPolicy");
+    assertThat(rateDiscountPolicy).isEqualTo(2000);
   }
 
   static class DiscountService {
     private final Map<String, DiscountPolicy> policyMap;
     private final List<DiscountPolicy> policies;
 
-    @Autowired
+    // 생성자가 1개라서 @Autowired 생략가능
     public DiscountService(Map<String, DiscountPolicy> policyMap, List<DiscountPolicy> policies) {
       this.policyMap = policyMap;
       this.policies = policies;
